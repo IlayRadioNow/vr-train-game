@@ -11,9 +11,9 @@ public class OutDestroyRabbit : MonoBehaviour
         //print(other.gameObject.name);
         if (other.TryGetComponent(out DestroyRabbit rabbit))
         {
-            if(!rabbit.transform.parent.GetComponent<MeshRenderer>().enabled)
+            if(rabbit.enabled)
             {
-                print(rabbit.transform.parent.name + "   " + rabbit.transform.parent.GetComponent<MeshRenderer>().enabled);
+                print(rabbit.transform.parent.name + "   " + rabbit.enabled);
                 TextUpdater.UpdateHPText();
                 Destroy(other.transform.parent.gameObject);
             }

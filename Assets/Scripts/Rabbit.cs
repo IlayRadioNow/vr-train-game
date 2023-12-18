@@ -13,13 +13,15 @@ public class Rabbit : MonoBehaviour
 
     // Start is called before the first frame update
     private void OnEnable()
-    {
-        GetComponent<CapsuleCollider>().enabled = false;
-        GetComponent<MeshRenderer>().enabled = false;
+    {   
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
         _agent = GetComponent<NavMeshAgent>();
         _halfSizeX = TrainNavMesh.Area.GetComponent<BoxCollider>().bounds.size.x / 2;
         _halfSizeZ = TrainNavMesh.Area.GetComponent<BoxCollider>().bounds.size.z / 2;
-        transform.GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(5).gameObject.SetActive(true);
     }
 
     // Update is called once per frame

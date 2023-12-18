@@ -5,7 +5,7 @@ using UnityEngine;
 public class LocateSit : MonoBehaviour
 {
     private Vector3 _target;
-    private Collider[] _sitColliders = new Collider[6]; 
+    private Collider[] _sitColliders = new Collider[8]; 
     // Start is called before the first frame update
     void Awake()
     {
@@ -15,6 +15,7 @@ public class LocateSit : MonoBehaviour
         {
             if (item!= null && item.TryGetComponent(out Sit sit))
             {
+                print(item);
                 _sitColliders[i] = item;
                 i++;
             }

@@ -5,11 +5,13 @@ using UnityEngine.AI;
 
 public class AiMovement : MonoBehaviour
 {
-    [SerializeField] private GameObject _handupObject,_finishPosition;
+    [SerializeField] private GameObject gameObject, _handupObject,_finishPosition;
 
     private NavMeshAgent _agent;
     private LocateSit _locator;
     private Vector3 _position;
+    private Vector3 _NPCposition;
+    private Animator animator;
 
     public PassengerState MyState;
 
@@ -22,15 +24,25 @@ public class AiMovement : MonoBehaviour
 
     private void Awake()
     {
+        animator = gameObject.GetComponent<Animator>();
         _locator = GetComponent<LocateSit>();
         _agent = GetComponent<NavMeshAgent>();
         MyState = PassengerState.OnBoard;
+        animator.SetInteger("state",2);
     }
 
     // Update is called once per frame
     public void HandUp()
     {   
-        _handupObject.SetActive(true);   
+        animator.SetInteger("state",4);
+        transform.GetChild(6).gameObject.SetActive(true);
+        //_handupObject.SetActive(true);
+    }
+    public void Sit()
+    {
+        transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
+        animator.SetInteger("state", 3);
+        _agent.enabled = false;
     }
 
     private void OnArrivalDestroy()
@@ -39,6 +51,7 @@ public class AiMovement : MonoBehaviour
         MyState++;
         if (MyState == PassengerState.DropOff)
         _agent.SetDestination(DropOffDestination.Target.position);
+        
     }
 
     private void OnEnable()

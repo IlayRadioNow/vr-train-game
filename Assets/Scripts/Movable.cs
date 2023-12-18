@@ -34,7 +34,7 @@ public class Movable : MonoBehaviour
         _inMove = true;
         while (_inMove) 
         {
-            transform.position += new Vector3(Time.deltaTime * 10f * _speed, 0, 0);
+            transform.position += new Vector3(Time.deltaTime * 1f * _speed, 0, 0);
             yield return null;
         }
         _inMove = false;

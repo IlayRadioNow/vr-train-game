@@ -11,17 +11,18 @@ public class Ticket : MonoBehaviour
 
     private void Start()
     {
-        if (Terminal.RabbitsCount > 0)
+        float random = Mathf.Round(UnityEngine.Random.Range(0.0f, 1.0f)) ;
+        if (random == 1)
         {
-            int random = UnityEngine.Random.Range(0, 2);
-            Terminal.RabbitsCount--;
             _isRabbit = Convert.ToBoolean(random);
         }
         else
         {
             _isRabbit=false;
         }
-        transform.parent.parent.name = IsRabbit? "rabbit": transform.name;
+        transform.name = IsRabbit? "rabbit": transform.name;
+        print("random");
+        print(random);
             print("IsRabbit = "+ IsRabbit + " " + transform.position);
         
         if (IsRabbit)
@@ -34,14 +35,16 @@ public class Ticket : MonoBehaviour
     // Start is called before the first frame update
     private void OnCollisionEnter(Collision collision)
     {
+        print("Yes1");
         if (collision.collider.CompareTag("Terminal"))
         {
+            print("Yes");
             if (IsRabbit)
             {
                 collision.collider.TryGetComponent(out Terminal terminal);
                 terminal.LightOn(IsRabbit);
 
-                transform.parent.parent.TryGetComponent(out Rabbit rabbit);
+                transform.parent.TryGetComponent(out Rabbit rabbit);
                 _rabbit = rabbit;
                 _rabbit.enabled = true;
             }

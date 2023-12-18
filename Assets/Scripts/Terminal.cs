@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Terminal : MonoBehaviour
 {
-    [SerializeField] private Material _red, _green;
-    [SerializeField] private MeshRenderer _renderer;
     private Material _defaultMaterial;
-    public static int RabbitsCount;
+    private Animator _animator;
+    private int _rabbitsCount;
+
+    public int getRabbits() => _rabbitsCount;
+    public void plusRabbit() => _rabbitsCount--;
+    public int minusRabbit() => _rabbitsCount++;
+
 
     private void Awake()
     {
-        RabbitsCount = 2;
-        _defaultMaterial = _renderer.material;
+        _rabbitsCount = 2;
+        _animator = GetComponent<Animator>();
+        _animator.SetInteger("state", 3);
     }
 
     public void LightOn(bool isRabbit)
@@ -20,12 +25,12 @@ public class Terminal : MonoBehaviour
         StopAllCoroutines();
         if (isRabbit)
         {
-            _renderer.material = _green;
+            _animator.SetInteger("state", 1);
             StartCoroutine(Evaluate());
         }
         else
         {
-            _renderer.material = _red;
+            _animator.SetInteger("state", 2);
             StartCoroutine(Evaluate());
         }
     }
@@ -33,7 +38,7 @@ public class Terminal : MonoBehaviour
     private IEnumerator Evaluate()
     {
         yield return new WaitForSeconds(5f);
-        _renderer.material = _defaultMaterial;
+        _animator.SetInteger("state", 3);
 
     }
 }
