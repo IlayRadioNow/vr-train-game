@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Rabbit : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject rabbit;
     private NavMeshAgent _agent;
 
     private float _halfSizeX;
@@ -21,7 +23,8 @@ public class Rabbit : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _halfSizeX = TrainNavMesh.Area.GetComponent<BoxCollider>().bounds.size.x / 2;
         _halfSizeZ = TrainNavMesh.Area.GetComponent<BoxCollider>().bounds.size.z / 2;
-        transform.GetChild(5).gameObject.SetActive(true);
+        rabbit.gameObject.SetActive(true);
+        _agent.enabled = true;
     }
 
     // Update is called once per frame

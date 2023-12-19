@@ -14,15 +14,13 @@ public class Sit : MonoBehaviour
     {
         _isOccupied = false;
     }
-
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        print("colider");
-        /*if (other.TryGetComponent(out AiMovement aiMovement))
+        if (other.TryGetComponent(out AiMovement aiMovement))
         {
             aiMovement.HandUp();
             aiMovement.Sit();
-        }*/
+        }
     }
 
     private void SitReset()

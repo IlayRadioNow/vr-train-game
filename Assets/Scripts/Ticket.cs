@@ -44,9 +44,9 @@ public class Ticket : MonoBehaviour
                 collision.collider.TryGetComponent(out Terminal terminal);
                 terminal.LightOn(IsRabbit);
 
-                transform.parent.TryGetComponent(out Rabbit rabbit);
-                _rabbit = rabbit;
-                _rabbit.enabled = true;
+                transform.parent.gameObject.GetComponent<Rabbit>().enabled = true;
+                //_rabbit = rabbit;
+                //_rabbit.enabled = true;
             }
             else
             {
