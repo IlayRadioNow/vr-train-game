@@ -45,7 +45,7 @@ public class AiMovement : MonoBehaviour
     {
         if (!isSit()) {
             _isSit=true;
-            transform.position = new Vector3(_position.x, _position.y * 4 / 10, _position.z);
+            transform.position = new Vector3(_position.x, _position.y * 2 / 10, _position.z);
             transform.rotation = Quaternion.Euler(new Vector3(0, -90, 0));
             animator.SetInteger("state", 3);
             _agent.enabled = false;
